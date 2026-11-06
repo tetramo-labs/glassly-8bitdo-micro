@@ -44,3 +44,44 @@ class NameProbeTests(unittest.TestCase):
         self.assertEqual(payload[OFFSET + len(BEFORE):], payloads[0][OFFSET + len(BEFORE):])
         self.assertFalse(report['hardware_accessed'])
         self.assertEqual(unpack(package, ['yichip']), (sections, [payload]))
+
+
+class StartupTests(unittest.TestCase):
+    def test_micro_layout_and_name_patch_ram(self):
+        from startup import reconstruct
+        from build_name_probe import build
+        stock = load_stock()[2][0]
+        records, regions, consumed = reconstruct(stock)
+        self.assertEqual(consumed, 929)
+        self.assertEqual([(r['destination'], r['size']) for r in records], [(0x20000, 0x794), (0x20794, 0x244c)])
+        self.assertEqual(reconstruct(build()[1]), (records, regions, consumed))
+
+    def test_rejects_other_scatter_layout(self):
+        from startup import reconstruct
+        stock = load_stock()[2][0]
+        for offset in (0x380, 0x12a8c, 0x12a9c, 0xbd22):
+            changed = bytearray(stock)
+            changed[offset] ^= 1
+            with self.assertRaises(ValueError): reconstruct(changed)
+
+    def test_invalid_compressed_stream(self):
+        from startup import unpack_data
+        for source, count in [(b'', 1), (b'\x10\x00', 1), (b'\x19\x01', 3), (b'\x21', 1)]:
+            with self.assertRaises(ValueError): unpack_data(source, count)
+
+
+class NotifyProbeTests(unittest.TestCase):
+    def test_only_audited_hook_tail_and_name_change(self):
+        from build_name_probe import build as name
+        from build_notify_probe import build, HOOK, TAIL
+        from firmware_image import sha256
+        _, base, _ = name()
+        package, patched, report = build()
+        self.assertEqual(patched[:HOOK], base[:HOOK])
+        self.assertEqual(patched[HOOK+4:TAIL], base[HOOK+4:TAIL])
+        self.assertEqual(patched[TAIL+report['tail_bytes']:], base[TAIL+report['tail_bytes']:])
+        native = (Path(__file__).resolve().parents[1]/'tools/flash_micro.c').read_text()
+        self.assertIn(sha256(package), native)
+        self.assertIn(sha256(patched), native)
+        self.assertEqual(report['persistent_ram_bytes'], 0)
+        self.assertEqual(report['tail_bytes'], 76)

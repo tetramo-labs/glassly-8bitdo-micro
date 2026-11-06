@@ -1,0 +1,107 @@
+{
+  "hardware_accessed": false,
+  "stock_plaintext_sha256": "e31c7f7656fb041ec6ede6603762d841783eb3d9b760321eaaa0c582aaa59233",
+  "reader": "0x010200c4",
+  "bank_reader": "0x0101bff4",
+  "register_base": "0x000f873c",
+  "active_low": true,
+  "combinations_checked": 131072,
+  "unused_gpio_bits_ignored": true,
+  "instruction_stubs": [],
+  "mappings": [
+    {
+      "bank": 0,
+      "pin": 0,
+      "mask_bit": 5
+    },
+    {
+      "bank": 0,
+      "pin": 1,
+      "mask_bit": 4
+    },
+    {
+      "bank": 0,
+      "pin": 6,
+      "mask_bit": 16
+    },
+    {
+      "bank": 0,
+      "pin": 9,
+      "mask_bit": 11
+    },
+    {
+      "bank": 0,
+      "pin": 10,
+      "mask_bit": 15
+    },
+    {
+      "bank": 0,
+      "pin": 14,
+      "mask_bit": 12
+    },
+    {
+      "bank": 1,
+      "pin": 0,
+      "mask_bit": 13
+    },
+    {
+      "bank": 1,
+      "pin": 5,
+      "mask_bit": 0
+    },
+    {
+      "bank": 1,
+      "pin": 10,
+      "mask_bit": 8
+    },
+    {
+      "bank": 1,
+      "pin": 11,
+      "mask_bit": 17
+    },
+    {
+      "bank": 1,
+      "pin": 12,
+      "mask_bit": 6
+    },
+    {
+      "bank": 1,
+      "pin": 13,
+      "mask_bit": 7
+    },
+    {
+      "bank": 1,
+      "pin": 2,
+      "mask_bit": 31
+    },
+    {
+      "bank": 2,
+      "pin": 1,
+      "mask_bit": 10
+    },
+    {
+      "bank": 2,
+      "pin": 4,
+      "mask_bit": 14
+    },
+    {
+      "bank": 2,
+      "pin": 10,
+      "mask_bit": 3
+    },
+    {
+      "bank": 2,
+      "pin": 0,
+      "mask_bit": 9
+    }
+  ],
+  "physical_button_labels_verified": false,
+  "limits": [
+    "Synthetic GPIO RAM only; no electrical or physical mapping proof",
+    "Raw sampling only; no debounce, input task or polling ownership established"
+  ],
+  "source_sha256": {
+    "tools/inspect_input.py": "f266996190efc7ad2b3a8b65c6590bfdc7ffc56f9b785f80f7c040a883e1275a",
+    "tools/inspect_startup.py": "e793d4e8aca67a73cf7616697013c588e9306aab7df7ef769013c9b79437a7a4"
+  }
+}

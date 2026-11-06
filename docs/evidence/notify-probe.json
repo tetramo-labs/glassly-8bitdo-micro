@@ -1,0 +1,53 @@
+{
+  "hardware_accessed": false,
+  "image": {
+    "kind": "Experimental one-byte FF13 echo; no button stream or idle-policy change",
+    "hardware_accessed": false,
+    "package_sha256": "e86ba128884dd1a741bcefd21d4978b2a7757a94d00c42d315b424097cd598c3",
+    "plaintext_sha256": "1c172f49d5cf74e9443277f4b904ad61fe7021c0c957acc2da2e5b91ed50a456",
+    "baseline_sha256": "fca4e5698166c69b67feabcce95e6674d7afcd72478f9acb25c3b9b71caf6e8e",
+    "hook": "0x1930",
+    "before": "0af0aaf9",
+    "after": "11f08efa",
+    "tail_offset": "0x12e50",
+    "tail_bytes": 76,
+    "persistent_ram_bytes": 0,
+    "local_stack_bytes": 48,
+    "startup_ram_unchanged": true,
+    "assembly_sha256": "18120a3fc39e93587132fecda445fefeb3bc7514c6a742f9551344708616c9cf",
+    "limits": [
+      "Requires live notification verification",
+      "Stock radio owns registration and CCC handling",
+      "No queue or retry; drops on sleeping radio or insufficient capacity",
+      "Existing vendor write semantics remain; diagnostic writes must avoid configuration command 04",
+      "Whole-firmware stack and computed references to tail are not proven"
+    ]
+  },
+  "event_cases": 2068,
+  "startup_ram_matches": true,
+  "startup_reads_tail": false,
+  "instruction_stubs": [],
+  "full_dispatch_and_ipc_executed": true,
+  "stock_sender_command09_and_handle_prefix_verified": true,
+  "dynamic_handle_cases": 3,
+  "irq_states_checked": [
+    0,
+    1
+  ],
+  "ring_cursor_pairs": 1024,
+  "lowest_observed_sp": "0x2fb70",
+  "isolated_stack_bytes": 912,
+  "gpio_or_button_stream_included": false,
+  "limits": [
+    "Radio and CCC not emulated",
+    "Watchdog inactive in event cases",
+    "No whole-firmware stack bound",
+    "No on-air notification result"
+  ],
+  "source_sha256": {
+    "tools/inspect_notify_probe.py": "812cff495ccf823caef8c4a12daf5a2e002b0a4c5a6117e80fcfd4659875fba8",
+    "tools/build_notify_probe.py": "b296f7141e8465381f0af9dbbe70e423cb07282265f08bdc28cd5b817c40ed83",
+    "firmware/notify_probe.s": "18120a3fc39e93587132fecda445fefeb3bc7514c6a742f9551344708616c9cf",
+    "tools/startup.py": "0d508a2dd9a237d9242a8841fdd5661ac1e9d0dc662a1d7c756dfe1ae2d567da"
+  }
+}

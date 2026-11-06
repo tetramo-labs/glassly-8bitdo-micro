@@ -99,3 +99,58 @@ RAM at `0x20000` (size `0x794`, compressed source `0x0102aaac`, initializer
 initializer `0x01023d22`). The complete decompressor at offsets `0x3ca..0x41f`
 is byte-identical to the audited Zero 2 helper. These are Micro-derived table
 entries, not proof of free RAM, custom code placement or interrupt ownership.
+
+## K-mode battery BLE and Micro input reconstruction
+
+After the user unplugged USB and selected K, scans initially found no Micro or
+80EL candidate; the user reported the LED off. With the receiver running before
+wake/pairing, the same 80EL peripheral reappeared and twice connected/subscribed
+to FF10/FF13/2902. USB registry had no controller. This wake/absence correlation
+supports attributing that peripheral to the Micro. Both captures timed out:
+about 30 seconds on the first, 157 seconds on the second. The user tapped A, B
+and a direction during the second connection; **zero notifications** arrived.
+No characteristic value was written. Neither timeout cause nor reliable idle
+behavior is established. See `evidence/k-mode-ble.json`.
+
+Micro startup execution, stopped before the application at `0x010261b0`, matches
+reconstructed initialized/BSS RAM byte-for-byte. The compressed stream consumes
+929 bytes; stack starts at `0x2ff00` and startup reaches `0x2fef0`. Eight actual
+pool free lists were executed and checked. The visibility wrapper at
+`0x0101a388` builds command 02 with payload `r0 | 6` for all eight Boolean
+argument combinations: stock already requests the BLE bit. These offline
+results do not prove caller coverage, radio acceptance or free RAM.
+
+The raw Micro reader is `0x010200c4`; its bank helper `0x0101bff4` reads LE16
+levels at `0xf873c + bank*2`. Seventeen active-low inputs contribute bits
+0, 3–17 and 31. All 131,072 combinations and unused GPIO bits pass actual Thumb
+execution without instruction stubs. Bit 31's physical role is not established;
+**none of these bits has a physical label yet**. The polling task, debounce and
+input ownership remain separate work. Source and evidence are in
+`tools/inspect_input.py`, `evidence/input-emulation.json` and
+`evidence/startup-emulation.json`.
+
+## Prepared notification experiment (not yet flashed)
+
+The Micro's stock sender at `0x0101a6cc` prefixes the registered handle from
+`0x20648` and builds command 09; actual execution to IPC entry verifies three
+synthetic handles. Startup code at `0x0101a838..0x0101a84c` registers FF10 from
+RAM `0x2065a`, then FF13/write+notify (`0x18`) from `0x2066b`, storing the returned
+handle at `0x20648`. The matched write path checks that handle before cancelling
+the watchdog and clearing idle.
+
+The complete experimental `notify-probe` image adds a 76-byte one-byte echo
+routine in the previously stock-cleared tail at `0x0102ae50`, replacing only the
+clear-idle BL at `0x01019930`, on top of the name probe. The Micro event value
+starts at caller SP+36; the Zero 2 stack offset is different. This uses no
+persistent RAM and leaves startup, registration, CCC and idle policy unchanged.
+Actual patched startup reads no injected tail bytes as data and produces stock
+RAM. All 2,068 dispatch/IPC cases pass offline, including 1,024 ring cursor
+pairs under both interrupt-mask states, insufficient/exact capacity, malformed
+lengths, wrong handles, sleep drops and several dynamic handles. No instruction
+stubs are used; radio/NVIC/GPIO pages are synthetic RAM. The isolated event stack
+bound is recorded in `evidence/notify-probe.json`, not a whole-firmware bound.
+
+The existing vendor configuration command 04 remains intact; host echo mode
+writes only `31`, `a5`, `00`, `ff`, requiring both an acknowledgement and matching
+notification before advancing. Tail execution and on-air notifications still
+require hardware validation. This image contains **no button stream**.

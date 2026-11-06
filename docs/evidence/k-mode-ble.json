@@ -1,0 +1,130 @@
+{
+  "hardware_observed": true,
+  "installed_image": "name-probe",
+  "mode": "K",
+  "usb_disconnected": true,
+  "characteristic_value_writes": 0,
+  "physical_correlation": "Candidate absent while user reports LED off; same candidate reappears during Micro wake/pair cycles",
+  "user_button_taps": "A, B and one direction during second subscribed capture",
+  "notifications_received": 0,
+  "connection_durations_seconds": [
+    30,
+    157
+  ],
+  "normal_idle_success": false,
+  "runs": [
+    {
+      "capture_sha256": "e01289a3bea5afc7ff23bda1f3cc063ed8c213011ed9386b0f2c2b920d35a1c5",
+      "events": [
+        {
+          "event": "central_state",
+          "state": 5,
+          "time": "2026-11-06T07:36:04Z"
+        },
+        {
+          "cached_name": "80EL",
+          "event": "discovered",
+          "local_name": "",
+          "manufacturer_data": "",
+          "rssi": -41,
+          "services": [],
+          "time": "2026-11-06T07:36:04Z"
+        },
+        {
+          "event": "connected",
+          "time": "2026-11-06T07:36:04Z"
+        },
+        {
+          "event": "service",
+          "time": "2026-11-06T07:36:05Z",
+          "uuid": "0000FF10-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "characteristic",
+          "properties": 24,
+          "service": "0000FF10-0000-1000-8000-00805F9B34FB",
+          "time": "2026-11-06T07:36:05Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "characteristic": "0000FF13-0000-1000-8000-00805F9B34FB",
+          "event": "descriptors",
+          "time": "2026-11-06T07:36:05Z",
+          "uuids": [
+            "2902"
+          ]
+        },
+        {
+          "event": "subscribed",
+          "time": "2026-11-06T07:36:05Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "code": 1,
+          "event": "finished",
+          "reason": "The connection has timed out unexpectedly.",
+          "time": "2026-11-06T07:36:34Z"
+        }
+      ]
+    },
+    {
+      "capture_sha256": "70e6818d4086ae6b7bd0e9eeeaec764c2eb5d506214b28a31b2ddcec8d8d15b0",
+      "events": [
+        {
+          "event": "central_state",
+          "state": 5,
+          "time": "2026-11-06T07:36:58Z"
+        },
+        {
+          "cached_name": "80EL",
+          "event": "discovered",
+          "local_name": "",
+          "manufacturer_data": "",
+          "rssi": -29,
+          "services": [],
+          "time": "2026-11-06T07:36:59Z"
+        },
+        {
+          "event": "connected",
+          "time": "2026-11-06T07:36:59Z"
+        },
+        {
+          "event": "service",
+          "time": "2026-11-06T07:36:59Z",
+          "uuid": "0000FF10-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "characteristic",
+          "properties": 24,
+          "service": "0000FF10-0000-1000-8000-00805F9B34FB",
+          "time": "2026-11-06T07:36:59Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "characteristic": "0000FF13-0000-1000-8000-00805F9B34FB",
+          "event": "descriptors",
+          "time": "2026-11-06T07:36:59Z",
+          "uuids": [
+            "2902"
+          ]
+        },
+        {
+          "event": "subscribed",
+          "time": "2026-11-06T07:36:59Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "code": 1,
+          "event": "finished",
+          "reason": "The connection has timed out unexpectedly.",
+          "time": "2026-11-06T07:39:36Z"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Disconnect cause not established",
+    "No exact press timestamps or physical button masks",
+    "No phone/background validation"
+  ]
+}

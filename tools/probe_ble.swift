@@ -1,12 +1,13 @@
 import Foundation
 import CoreBluetooth
 
-// Bounded Micro discovery/inventory only. No characteristic writes or subscriptions.
+// Bounded Micro BLE diagnostics. Only echo mode writes values: 31, a5, 00, ff.
+// Echo requires the separately flashed Micro notification probe; avoid vendor command 04.
 let args = Array(CommandLine.arguments.dropFirst())
-guard args.count == 3, ["scan", "inspect"].contains(args[0]),
-      let duration = Double(args[2]), duration.isFinite, (5...120).contains(duration),
+guard args.count == 3, ["scan", "inspect", "listen", "echo"].contains(args[0]),
+      let duration = Double(args[2]), duration.isFinite, (5...300).contains(duration),
       args[0] == "scan" ? args[1] == "-" : UUID(uuidString: args[1]) != nil else {
-    fputs("Usage: probe_ble scan - SECONDS | inspect OBSERVED_UUID SECONDS\n", stderr)
+    fputs("Usage: probe_ble scan - SECONDS | inspect OBSERVED_UUID SECONDS | listen OBSERVED_UUID SECONDS | echo OBSERVED_UUID SECONDS\n", stderr)
     exit(64)
 }
 final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
@@ -15,6 +16,13 @@ final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var seen = Set<UUID>()
     var pending = 0
     var finished = false
+    var subscribed = false
+    var notifications = 0
+    var characteristic: CBCharacteristic?
+    let echoValues: [UInt8] = [0x31, 0xa5, 0x00, 0xff]
+    var echoIndex = 0
+    var acknowledged = false
+    var echoed = false
     let identifier = UUID(uuidString: args[1])
     func emit(_ event: String, _ fields: [String: Any] = [:]) {
         var record = fields
@@ -34,7 +42,8 @@ final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     func start(duration: Double) {
         central = CBCentralManager(delegate: self, queue: .main)
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
-            self?.finish(args[0] == "scan" ? 0 : 1, "time limit")
+            guard let self else { return }
+            self.finish(args[0] == "scan" || (args[0] == "listen" && self.subscribed) ? 0 : 1, "time limit")
         }
     }
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -53,13 +62,13 @@ final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         let candidate = [local, cached].contains {
             $0 == "80EL" || $0.lowercased().contains("micro") || $0.lowercased().contains("8bitdo")
         } || services.contains("FF10")
-        guard candidate || peripheral.identifier == identifier else { return }
+        guard args[0] == "scan" || candidate || peripheral.identifier == identifier else { return }
         if seen.insert(peripheral.identifier).inserted {
             emit("discovered", ["identifier": peripheral.identifier.uuidString, "local_name": local,
                  "cached_name": cached, "services": services, "rssi": rssi,
                  "manufacturer_data": (ad[CBAdvertisementDataManufacturerDataKey] as? Data ?? Data()).map { String(format: "%02x", $0) }.joined()])
         }
-        guard args[0] == "inspect", peripheral.identifier == identifier, target == nil else { return }
+        guard args[0] != "scan", peripheral.identifier == identifier, target == nil else { return }
         target = peripheral; peripheral.delegate = self
         central.stopScan(); central.connect(peripheral)
     }
@@ -75,7 +84,7 @@ final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard error == nil, let services = peripheral.services else { finish(1, "service discovery failed"); return }
         pending = services.count
-        if services.isEmpty { finish(0, "no visible services"); return }
+        if services.isEmpty { finish(args[0] == "inspect" ? 0 : 1, "no visible services"); return }
         for service in services { emit("service", ["uuid": service.uuid.uuidString]); peripheral.discoverCharacteristics(nil, for: service) }
     }
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
@@ -93,9 +102,56 @@ final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                              "uuids": (characteristic.descriptors ?? []).map { $0.uuid.uuidString }])
         complete()
     }
+    func peripheral(_: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {
+        guard error == nil, characteristic.isNotifying else { finish(1, error?.localizedDescription ?? "subscription failed"); return }
+        subscribed = true
+        emit("subscribed", ["uuid": characteristic.uuid.uuidString])
+        if args[0] == "echo" { sendEcho() }
+    }
+    func sendEcho() {
+        guard let target, let characteristic, echoIndex < echoValues.count else { finish(1, "Missing echo target"); return }
+        acknowledged = false; echoed = false
+        let value = echoValues[echoIndex]
+        emit("write_requested", ["hex": String(format: "%02x", value)])
+        target.writeValue(Data([value]), for: characteristic, type: .withResponse)
+    }
+    func advanceEcho() {
+        guard acknowledged && echoed else { return }
+        echoIndex += 1
+        if echoIndex == echoValues.count { finish(0, "All four acknowledged echoes verified") }
+        else { sendEcho() }
+    }
+    func peripheral(_: CBPeripheral, didWriteValueFor _: CBCharacteristic, error: Error?) {
+        guard error == nil else { finish(1, error!.localizedDescription); return }
+        acknowledged = true
+        emit("write_acknowledged", ["index": echoIndex])
+        advanceEcho()
+    }
+    func peripheral(_: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        guard error == nil else { finish(1, error!.localizedDescription); return }
+        if args[0] == "echo" {
+            guard echoIndex < echoValues.count, characteristic.value == Data([echoValues[echoIndex]]) else { finish(1, "Unexpected echo notification"); return }
+            echoed = true
+        }
+        notifications += 1
+        emit("notification", ["uuid": characteristic.uuid.uuidString, "sequence": notifications,
+             "hex": (characteristic.value ?? Data()).map { String(format: "%02x", $0) }.joined()])
+        if args[0] == "echo" { advanceEcho() }
+    }
     func complete() {
         pending -= 1
-        if pending == 0 { finish(0, "GATT inventory complete") }
+        if pending == 0 {
+            if ["listen", "echo"].contains(args[0]), let target {
+                let serviceID = CBUUID(string: "0000FF10-0000-1000-8000-00805F9B34FB")
+                let valueID = CBUUID(string: "0000FF13-0000-1000-8000-00805F9B34FB")
+                let matches = (target.services ?? []).filter { $0.uuid == serviceID }
+                    .flatMap { $0.characteristics ?? [] }.filter { $0.uuid == valueID && $0.properties.contains(.notify) }
+                guard matches.count == 1 else { finish(1, "Expected exactly one FF13 notify characteristic"); return }
+                guard args[0] != "echo" || matches[0].properties.contains(.write) else { finish(1, "Echo requires writes with response"); return }
+                characteristic = matches[0]
+                target.setNotifyValue(true, for: matches[0])
+            } else { finish(0, "GATT inventory complete") }
+        }
     }
 }
 let probe = Probe()

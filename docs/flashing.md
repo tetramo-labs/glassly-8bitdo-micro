@@ -54,7 +54,7 @@ Transactions, input/source snapshots and `before-application.bin` /
 The original development unit had a nonzero 432-byte application tail; stock
 reflash replaced it with zeros. Its purpose is unknown and its backup is retained.
 
-Only exact known stock/name/development-unit factory hashes and version 105 are
+Only exact known stock/name/notification-probe/development-unit factory hashes and version 105 are
 accepted. An unknown baseline is saved, then rejected before erase. For another
 unit, keep that backup and use the official updater to install stock Micro v1.05
 before retrying. If it still differs, inspect the evidence; do not relax the pins.
@@ -69,3 +69,25 @@ python3 scripts/flash.py stock --location USB_LOCATION --apply
 
 This reinstalls pinned v1.05, not arbitrary historical device data. Full button
 streaming and phone background operation remain work in progress.
+
+## Notification experiment
+
+`notify-probe` is the next bounded experiment, **built and emulated but not yet
+hardware verified**. It echoes a single received byte over the existing FF13
+notification path; it does not stream buttons or alter idle behavior.
+
+```sh
+python3 -m venv .venv
+.venv/bin/pip install -r requirements-analysis.txt
+python3 tools/build_notify_probe.py
+.venv/bin/python tools/inspect_notify_probe.py
+python3 scripts/check.py
+python3 scripts/flash.py notify-probe --location USB_LOCATION --apply
+build/probe_ble echo OBSERVED_UUID 60
+```
+
+The last command is only for the flashed probe: it subscribes, then writes the
+four audited values `31`, `a5`, `00`, `ff`. `listen` subscribes without value
+writes; `inspect` only discovers services. Stock restoration uses the same
+`stock` command above. This exact probe hash is admitted as a known baseline
+for restoration; other image hashes remain rejected.

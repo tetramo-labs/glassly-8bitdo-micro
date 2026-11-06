@@ -1,0 +1,175 @@
+{
+  "hardware_accessed": false,
+  "stock_plaintext_sha256": "e31c7f7656fb041ec6ede6603762d841783eb3d9b760321eaaa0c582aaa59233",
+  "startup": {
+    "records": [
+      {
+        "source": 16951980,
+        "destination": 131072,
+        "size": 1940,
+        "initializer": 16876490
+      },
+      {
+        "source": 16952912,
+        "destination": 133012,
+        "size": 9292,
+        "initializer": 16923938
+      }
+    ],
+    "compressed_bytes_consumed": 929,
+    "ram_sha256": "8a41ab7783a39862b8d6cad10eb8a95bf4fd5a26aef4b41f66df43aeebf08b1d",
+    "application_boundary": "0x10261b0",
+    "stack_top": "0x2ff00",
+    "lowest_observed_startup_sp": "0x2fef0",
+    "actual_thumb_matches_reconstruction": true,
+    "writes_within_regions_and_stack": true
+  },
+  "pools": [
+    {
+      "head": "0x206e8",
+      "start": "0x2212c",
+      "count": 3,
+      "stride": 600,
+      "end": "0x22834"
+    },
+    {
+      "head": "0x206ec",
+      "start": "0x22834",
+      "count": 4,
+      "stride": 20,
+      "end": "0x22884"
+    },
+    {
+      "head": "0x206f0",
+      "start": "0x22884",
+      "count": 4,
+      "stride": 64,
+      "end": "0x22984"
+    },
+    {
+      "head": "0x206f4",
+      "start": "0x22984",
+      "count": 3,
+      "stride": 60,
+      "end": "0x22a38"
+    },
+    {
+      "head": "0x206f8",
+      "start": "0x22a38",
+      "count": 1,
+      "stride": 16,
+      "end": "0x22a48"
+    },
+    {
+      "head": "0x206fc",
+      "start": "0x22a48",
+      "count": 3,
+      "stride": 40,
+      "end": "0x22ac0"
+    },
+    {
+      "head": "0x20700",
+      "start": "0x22ac0",
+      "count": 5,
+      "stride": 28,
+      "end": "0x22b4c"
+    },
+    {
+      "head": "0x20704",
+      "start": "0x22b4c",
+      "count": 3,
+      "stride": 12,
+      "end": "0x22b70"
+    }
+  ],
+  "pool_free_lists_verified": true,
+  "visibility_cases": [
+    {
+      "arguments": [
+        0,
+        0,
+        0
+      ],
+      "opcode": 2,
+      "payload_hex": "06"
+    },
+    {
+      "arguments": [
+        0,
+        0,
+        1
+      ],
+      "opcode": 2,
+      "payload_hex": "06"
+    },
+    {
+      "arguments": [
+        0,
+        1,
+        0
+      ],
+      "opcode": 2,
+      "payload_hex": "06"
+    },
+    {
+      "arguments": [
+        0,
+        1,
+        1
+      ],
+      "opcode": 2,
+      "payload_hex": "06"
+    },
+    {
+      "arguments": [
+        1,
+        0,
+        0
+      ],
+      "opcode": 2,
+      "payload_hex": "07"
+    },
+    {
+      "arguments": [
+        1,
+        0,
+        1
+      ],
+      "opcode": 2,
+      "payload_hex": "07"
+    },
+    {
+      "arguments": [
+        1,
+        1,
+        0
+      ],
+      "opcode": 2,
+      "payload_hex": "07"
+    },
+    {
+      "arguments": [
+        1,
+        1,
+        1
+      ],
+      "opcode": 2,
+      "payload_hex": "07"
+    }
+  ],
+  "visibility_entry": "0x0101a388",
+  "ipc_submission_entry": "0x01020a14",
+  "instruction_stubs": [],
+  "synthetic_register_pages": [
+    "0xe000e000"
+  ],
+  "limits": [
+    "No radio execution or on-air result",
+    "No whole-firmware stack or free-RAM proof",
+    "Visibility wrapper always requests bits 1 and 2; caller coverage is not established"
+  ],
+  "source_sha256": {
+    "tools/startup.py": "0d508a2dd9a237d9242a8841fdd5661ac1e9d0dc662a1d7c756dfe1ae2d567da",
+    "tools/inspect_startup.py": "e793d4e8aca67a73cf7616697013c588e9306aab7df7ef769013c9b79437a7a4"
+  }
+}
