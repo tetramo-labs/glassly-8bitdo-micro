@@ -1,0 +1,147 @@
+{
+  "hardware_observed": true,
+  "mode": "K",
+  "usb_connected": false,
+  "usb_capture": "20261106T083037.668245Z",
+  "image": "buttons-probe",
+  "package_sha256": "643e17862c39b6a693ac27b7dc61be16d73a7827937165ebd56d3e459eea3d1d",
+  "capture_sha256": "7335db17270ee382f031b5b001504e1b94160c787f5bcc196a24828de11621ee",
+  "diagnostic_source_sha256": "08f950625db966e2cb619d1c13256d68cd35ccc8f9829f9d5cc8487699ab5075",
+  "connected_seconds": 314.0,
+  "idle_after_A_release_seconds": 279.0,
+  "timestamp_resolution_seconds": 1,
+  "keepalive_writes": 0,
+  "control_writes": [
+    "a1",
+    "a0"
+  ],
+  "all_control_writes_acknowledged": true,
+  "sequence_gaps": 0,
+  "overflow_flags": 0,
+  "events": [
+    {
+      "event": "central_state",
+      "state": 5,
+      "time": "2026-11-06T08:30:36Z"
+    },
+    {
+      "cached_name": "80EL",
+      "event": "discovered",
+      "local_name": "",
+      "manufacturer_data": "",
+      "rssi": -55,
+      "services": [],
+      "time": "2026-11-06T08:30:36Z"
+    },
+    {
+      "event": "connected",
+      "time": "2026-11-06T08:30:37Z"
+    },
+    {
+      "event": "service",
+      "time": "2026-11-06T08:30:37Z",
+      "uuid": "0000FF10-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "event": "characteristic",
+      "properties": 24,
+      "service": "0000FF10-0000-1000-8000-00805F9B34FB",
+      "time": "2026-11-06T08:30:37Z",
+      "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "characteristic": "0000FF13-0000-1000-8000-00805F9B34FB",
+      "event": "descriptors",
+      "time": "2026-11-06T08:30:37Z",
+      "uuids": [
+        "2902"
+      ]
+    },
+    {
+      "event": "subscribed",
+      "time": "2026-11-06T08:30:37Z",
+      "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "event": "stream_start_requested",
+      "time": "2026-11-06T08:30:37Z"
+    },
+    {
+      "event": "stream_start_acknowledged",
+      "time": "2026-11-06T08:30:37Z"
+    },
+    {
+      "event": "button_state",
+      "flags": 2,
+      "mask": "00000000",
+      "pressed": "00000000",
+      "released": "00000000",
+      "resync": true,
+      "sequence": 0,
+      "sequence_gap": false,
+      "time": "2026-11-06T08:30:37Z"
+    },
+    {
+      "event": "notification",
+      "hex": "4705000200000000",
+      "sequence": 1,
+      "time": "2026-11-06T08:30:37Z",
+      "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "event": "button_state",
+      "flags": 0,
+      "mask": "00002000",
+      "pressed": "00002000",
+      "released": "00000000",
+      "resync": false,
+      "sequence": 1,
+      "sequence_gap": false,
+      "time": "2026-11-06T08:31:11Z"
+    },
+    {
+      "event": "notification",
+      "hex": "4705010000200000",
+      "sequence": 2,
+      "time": "2026-11-06T08:31:11Z",
+      "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "event": "button_state",
+      "flags": 0,
+      "mask": "00000000",
+      "pressed": "00000000",
+      "released": "00002000",
+      "resync": false,
+      "sequence": 2,
+      "sequence_gap": false,
+      "time": "2026-11-06T08:31:12Z"
+    },
+    {
+      "event": "notification",
+      "hex": "4705020000000000",
+      "sequence": 3,
+      "time": "2026-11-06T08:31:12Z",
+      "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "event": "stream_stop_requested",
+      "time": "2026-11-06T08:35:51Z"
+    },
+    {
+      "event": "stream_stop_acknowledged",
+      "time": "2026-11-06T08:35:51Z"
+    },
+    {
+      "code": 0,
+      "event": "finished",
+      "reason": "Stream capture complete",
+      "time": "2026-11-06T08:35:51Z"
+    }
+  ],
+  "limits": [
+    "One bounded battery run on one controller",
+    "No long-term battery-life or phone background/locked validation",
+    "Bit 31 physical role remains unknown"
+  ]
+}

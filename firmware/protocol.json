@@ -1,0 +1,41 @@
+{
+  "model": "8BitDo Micro",
+  "protocol_tag": "4705",
+  "service_uuid": "0000FF10-0000-1000-8000-00805F9B34FB",
+  "characteristic_uuid": "0000FF13-0000-1000-8000-00805F9B34FB",
+  "packet_bytes": 8,
+  "start": "a1",
+  "stop": "a0",
+  "byte_layout": [
+    "47",
+    "05",
+    "sequence modulo 256",
+    "flags: bit0 overflow, bit1 baseline",
+    "raw mask LE32 (bytes 4..7)"
+  ],
+  "allowed_raw_mask": "0x8003fff9",
+  "mapped_button_mask": "0x0003fff9",
+  "unmapped_raw_bits": [
+    "0x80000000"
+  ],
+  "buttons": {
+    "A": "0x00002000",
+    "B": "0x00001000",
+    "X": "0x00000010",
+    "Y": "0x00000020",
+    "Up": "0x00000200",
+    "Down": "0x00000100",
+    "Left": "0x00000080",
+    "Right": "0x00000040",
+    "L": "0x00000400",
+    "R": "0x00000800",
+    "L2": "0x00004000",
+    "R2": "0x00008000",
+    "Minus": "0x00000008",
+    "Plus": "0x00000001",
+    "Star": "0x00010000",
+    "Home": "0x00020000"
+  },
+  "physical_mapping_hardware_verified": true,
+  "host_policy": "Subscribe before A1; A0 acknowledgement before unsubscribe; baseline/overflow/gap resynchronizes held state without edges."
+}

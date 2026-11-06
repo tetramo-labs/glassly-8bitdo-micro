@@ -184,3 +184,44 @@ explicit stop and connected/enabled idle/watchdog policy are checked offline.
 Only the OEM report task and connection power/indicator helper are stubbed in
 the stream harness. Detailed bindings, placement and limits are in
 `buttons-probe.md`; hardware delivery and physical labels remain unverified.
+
+### First button-stream flash
+
+The button-stream image flashed and fully read back on 2026-11-06 UTC, with
+unchanged 4,096-byte metadata and normal USB boot. At 08:18 UTC, subscription and
+A1 acknowledgement succeeded, followed by `4705000200000000`: sequence-zero,
+new-session baseline, raw mask zero. USB was connected in D mode. The ordered
+physical button test is now recording; no physical mapping is claimed yet.
+
+### Physical inputs observed
+
+The user completed A, B, X, Y, Up, Down, Left, Right, L, R, L2, R2, minus,
+plus, Star and Home in order. All sixteen complete press/release pairs arrived
+as sequence 1–32 after baseline 0, without gaps or overflow. The user then
+performed A+B and L2+R2; raw states `0x3000` and `0xc000` both arrived. Additional
+and staggered transitions during the chord test remain in the capture and are
+not hidden. `firmware/protocol.json` records the observed mapping. Bit 31 remains
+unmapped; it is not assigned to a Glassly action.
+
+The USB capture ended intentionally with A0 acknowledged after 45 contiguous
+packets. A separate reconnect at 08:26 UTC produced a fresh sequence-zero baseline
+and acknowledged A1/A0. See `evidence/buttons-probe-gatt.json`.
+
+### Battery streaming and idle verified
+
+With USB absent from the macOS registry and the user confirming K mode on battery,
+FF13 connected at 08:30:37 UTC. A1 was acknowledged and a fresh sequence-zero
+baseline arrived. The user tapped A: `0x2000` then zero arrived at 08:31:11–12.
+The connection remained active until an acknowledged A0 at 08:35:51: **314 seconds
+connected and 279 seconds idle after A release**, using the capture's one-second
+timestamps. No periodic keepalive writes, gaps or overflow occurred. The receiver
+ended intentionally with exit zero. See `evidence/buttons-probe-battery.json`.
+This verifies the active-session idle policy for this bounded run, not long-term
+battery life or phone background/locked delivery.
+
+Glassly now includes native iOS/Android Micro v5 drivers, all sixteen mappings,
+per-unit restoration, concise pairing copy and the Micro image from glassly-site.
+The app change is published on `dev` through commit `2514a339b6`; iOS controller/
+restoration tests (20), Android Micro tests (6), pairing UI tests (15), controller
+registry tests (10), Android compilation and the full app typecheck pass.
+The Maestro flow and physical-phone background tests remain unexecuted.

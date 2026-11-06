@@ -73,10 +73,39 @@
       "runtime_product": "Glassly Micro test01",
       "runtime_vid_pid": "2dc8:9020",
       "runtime_hid_report_bytes": 136
+    },
+    {
+      "image": "buttons-probe",
+      "transaction": "build/hardware/20261106T081656.543418Z-script-flash",
+      "exit_code": 0,
+      "package_sha256": "643e17862c39b6a693ac27b7dc61be16d73a7827937165ebd56d3e459eea3d1d",
+      "expected_plaintext_sha256": "7a16629b0ade32cad181bbb01181d2fe33d76d80083c1432ff8b75b67df706d4",
+      "readback_sha256": "7a16629b0ade32cad181bbb01181d2fe33d76d80083c1432ff8b75b67df706d4",
+      "full_application_match": true,
+      "verified_bytes": 77824,
+      "changed_bytes": 331,
+      "metadata_unchanged": true,
+      "source_sha256": {
+        "scripts/flash.py": "63cfae0fa20b8f057c6f5f65569054efb0b1ff9530fc8e8e7136c599f1f3500e",
+        "tools/flash_micro.c": "65c0cab9ff42fd4e9d5d3f7c6667f730fb2421e94b91c1e507e7efb30be2d1cb",
+        "tools/build_name_probe.py": "0da39daac42f17ce38a952a401e1f0073677fbd0507d49aa742040665fd5b139",
+        "tools/firmware_image.py": "5a878ae85269e31ce4185b89695141b2ff39dc9c84ef1dd448846f4c9d3d0c34",
+        "tools/build_notify_probe.py": "b296f7141e8465381f0af9dbbe70e423cb07282265f08bdc28cd5b817c40ed83",
+        "tools/startup.py": "0d508a2dd9a237d9242a8841fdd5661ac1e9d0dc662a1d7c756dfe1ae2d567da",
+        "tools/elf_text.py": "4a2cff4aefcb938e1a8764806355a0a7e9f4c6014c244ecef8755f515ef70946",
+        "firmware/notify_probe.s": "18120a3fc39e93587132fecda445fefeb3bc7514c6a742f9551344708616c9cf",
+        "firmware/buttons_probe.s": "8fbe26c9cce1d5c52384ff4e1700e7ab5b362b8ba4354b0ed91c528d782ae3bd",
+        "tools/build_buttons_probe.py": "7475d97a1bd7571c3562965ee623b26babef6ff5afe0dbfeb09e1a5794fd09d5",
+        "third_party/8cryptdo/cryptdo8.py": "6701ba2b6089c47686b2785e1c5729e8533ef1102e1f7cdde904bad9b73167bc",
+        "sources.lock.json": "1c87aa5c434199bec71574a05983ef6999da12a98117832ee769aac65d035d5b"
+      },
+      "runtime_product": "Glassly Micro test01",
+      "runtime_vid_pid": "2dc8:9020",
+      "runtime_hid_report_bytes": 136
     }
   ],
   "limits": [
-    "No custom GATT stream or button mapping verified",
+    "Physical Micro button mapping and battery stream reliability not yet verified",
     "Original device tail preserved only in local backups"
   ]
 }

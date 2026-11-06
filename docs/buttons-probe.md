@@ -1,8 +1,11 @@
 # Micro button-stream experiment
 
-Status: built; offline qualification passed (131,072 masks, 2,048 buffer/IRQ
-cases and 12,000 independent-model polls). Hardware button delivery,
-physical mapping, idle behavior and reconnect are not yet verified.
+Status: flashed with full readback and unchanged metadata. Runtime USB boot, A1
+acknowledgement and the first BLE baseline `4705000200000000` are observed.
+Offline qualification passed (131,072 masks, 2,048 buffer/IRQ cases and 12,000
+independent-model polls). All 16 physical buttons and A+B / L2+R2 combinations are verified. Reconnect produced a fresh baseline. On battery in K mode, the stream stayed
+connected 314 seconds, including 279 seconds idle after A release without
+keepalive writes; A0 was acknowledged before intentional disconnect.
 
 The image preserves the Micro's existing FF10/FF13 registration and radio-owned
 CCC handling. Subscribe, wait for subscription completion, then write **A1** with
@@ -19,8 +22,8 @@ Each notification is eight bytes:
 | 3 | Bit 0: overflow; bit 1: initial baseline |
 | 4–7 | Full raw Micro mask, little endian; allowed bits `0x8003fff9` |
 
-Physical button labels are unassigned. Bit 31 is retained, without assuming its
-physical role. Baseline, overflow and sequence gaps replace held state without
+Physical mappings from the ordered tap test are in `firmware/protocol.json`.
+Bit 31 is retained but unassigned; its physical role is not established. Baseline, overflow and sequence gaps replace held state without
 synthesizing input edges. Regular consecutive packets produce pressed/released
 masks from the difference.
 
@@ -41,7 +44,7 @@ masks from the difference.
   stall transmission while sampling continues; A1 can reset the session.
 - While connected and explicitly enabled, each poll clears idle and cancels the
   stock watchdog. Stop/disconnect restores the stock policy. Idle suppression on
-  battery remains a hardware question.
+  battery passed the bounded 314-second capture; longer-term behavior is unmeasured.
 
 ## State and placement
 
@@ -85,3 +88,28 @@ Generated images, raw USB backups and BLE captures remain local under `build/`.
 
 The isolated maximum observed stack use is 900 bytes. Sanitized checks are in
 `evidence/buttons-probe-emulation.json` and `evidence/micro-bindings.json`.
+
+## Observed physical mapping
+
+| Button | Raw mask |
+| --- | --- |
+| A | `0x00002000` |
+| B | `0x00001000` |
+| X | `0x00000010` |
+| Y | `0x00000020` |
+| Up | `0x00000200` |
+| Down | `0x00000100` |
+| Left | `0x00000080` |
+| Right | `0x00000040` |
+| L | `0x00000400` |
+| R | `0x00000800` |
+| L2 | `0x00004000` |
+| R2 | `0x00008000` |
+| Minus | `0x00000008` |
+| Plus | `0x00000001` |
+| Star | `0x00010000` |
+| Home | `0x00020000` |
+
+All 16 ordered press/release pairs arrived consecutively with no gaps or overflow.
+A+B produced `0x3000`, and L2+R2 produced `0xc000`; staggered transitions and
+additional taps during the chord test are retained in the local capture.

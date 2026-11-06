@@ -1,0 +1,1010 @@
+{
+  "hardware_observed": true,
+  "image": "buttons-probe",
+  "mode": "D",
+  "usb_connected": true,
+  "protocol": "4705",
+  "ordered_buttons": [
+    "A",
+    "B",
+    "X",
+    "Y",
+    "Up",
+    "Down",
+    "Left",
+    "Right",
+    "L",
+    "R",
+    "L2",
+    "R2",
+    "Minus",
+    "Plus",
+    "Star",
+    "Home"
+  ],
+  "chords": [
+    "0x3000",
+    "0xc000"
+  ],
+  "sequence_gaps": 0,
+  "overflow_flags": 0,
+  "captures": [
+    {
+      "capture_sha256": "8a8edbd8c81654be167b7188b2d71e91f1613dad452ee27a29341b27f2f3c8e4",
+      "packets": 45,
+      "events": [
+        {
+          "event": "central_state",
+          "state": 5,
+          "time": "2026-11-06T08:18:30Z"
+        },
+        {
+          "cached_name": "80EL",
+          "event": "discovered",
+          "local_name": "",
+          "manufacturer_data": "",
+          "rssi": -52,
+          "services": [],
+          "time": "2026-11-06T08:18:30Z"
+        },
+        {
+          "event": "connected",
+          "time": "2026-11-06T08:18:31Z"
+        },
+        {
+          "event": "service",
+          "time": "2026-11-06T08:18:31Z",
+          "uuid": "0000FF10-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "characteristic",
+          "properties": 24,
+          "service": "0000FF10-0000-1000-8000-00805F9B34FB",
+          "time": "2026-11-06T08:18:31Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "characteristic": "0000FF13-0000-1000-8000-00805F9B34FB",
+          "event": "descriptors",
+          "time": "2026-11-06T08:18:31Z",
+          "uuids": [
+            "2902"
+          ]
+        },
+        {
+          "event": "subscribed",
+          "time": "2026-11-06T08:18:31Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "stream_start_requested",
+          "time": "2026-11-06T08:18:31Z"
+        },
+        {
+          "event": "stream_start_acknowledged",
+          "time": "2026-11-06T08:18:31Z"
+        },
+        {
+          "event": "button_state",
+          "flags": 2,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000000",
+          "resync": true,
+          "sequence": 0,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:18:31Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705000200000000",
+          "sequence": 1,
+          "time": "2026-11-06T08:18:31Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00002000",
+          "pressed": "00002000",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 1,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:15Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705010000200000",
+          "sequence": 2,
+          "time": "2026-11-06T08:19:15Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00002000",
+          "resync": false,
+          "sequence": 2,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:15Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705020000000000",
+          "sequence": 3,
+          "time": "2026-11-06T08:19:15Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00001000",
+          "pressed": "00001000",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 3,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:16Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705030000100000",
+          "sequence": 4,
+          "time": "2026-11-06T08:19:16Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00001000",
+          "resync": false,
+          "sequence": 4,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:16Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705040000000000",
+          "sequence": 5,
+          "time": "2026-11-06T08:19:16Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000010",
+          "pressed": "00000010",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 5,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:18Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705050010000000",
+          "sequence": 6,
+          "time": "2026-11-06T08:19:18Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000010",
+          "resync": false,
+          "sequence": 6,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:18Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705060000000000",
+          "sequence": 7,
+          "time": "2026-11-06T08:19:18Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000020",
+          "pressed": "00000020",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 7,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:19Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705070020000000",
+          "sequence": 8,
+          "time": "2026-11-06T08:19:19Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000020",
+          "resync": false,
+          "sequence": 8,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:19Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705080000000000",
+          "sequence": 9,
+          "time": "2026-11-06T08:19:19Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000200",
+          "pressed": "00000200",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 9,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:20Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705090000020000",
+          "sequence": 10,
+          "time": "2026-11-06T08:19:20Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000200",
+          "resync": false,
+          "sequence": 10,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:20Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47050a0000000000",
+          "sequence": 11,
+          "time": "2026-11-06T08:19:20Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000100",
+          "pressed": "00000100",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 11,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:20Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47050b0000010000",
+          "sequence": 12,
+          "time": "2026-11-06T08:19:20Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000100",
+          "resync": false,
+          "sequence": 12,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:21Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47050c0000000000",
+          "sequence": 13,
+          "time": "2026-11-06T08:19:21Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000080",
+          "pressed": "00000080",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 13,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:21Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47050d0080000000",
+          "sequence": 14,
+          "time": "2026-11-06T08:19:21Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000080",
+          "resync": false,
+          "sequence": 14,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:21Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47050e0000000000",
+          "sequence": 15,
+          "time": "2026-11-06T08:19:21Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000040",
+          "pressed": "00000040",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 15,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:22Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47050f0040000000",
+          "sequence": 16,
+          "time": "2026-11-06T08:19:22Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000040",
+          "resync": false,
+          "sequence": 16,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:22Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705100000000000",
+          "sequence": 17,
+          "time": "2026-11-06T08:19:22Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000400",
+          "pressed": "00000400",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 17,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:25Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705110000040000",
+          "sequence": 18,
+          "time": "2026-11-06T08:19:25Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000400",
+          "resync": false,
+          "sequence": 18,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:26Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705120000000000",
+          "sequence": 19,
+          "time": "2026-11-06T08:19:26Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000800",
+          "pressed": "00000800",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 19,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:26Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705130000080000",
+          "sequence": 20,
+          "time": "2026-11-06T08:19:26Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000800",
+          "resync": false,
+          "sequence": 20,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:26Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705140000000000",
+          "sequence": 21,
+          "time": "2026-11-06T08:19:26Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00004000",
+          "pressed": "00004000",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 21,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:27Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705150000400000",
+          "sequence": 22,
+          "time": "2026-11-06T08:19:27Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00004000",
+          "resync": false,
+          "sequence": 22,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:28Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705160000000000",
+          "sequence": 23,
+          "time": "2026-11-06T08:19:28Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00008000",
+          "pressed": "00008000",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 23,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:28Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705170000800000",
+          "sequence": 24,
+          "time": "2026-11-06T08:19:28Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00008000",
+          "resync": false,
+          "sequence": 24,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:28Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705180000000000",
+          "sequence": 25,
+          "time": "2026-11-06T08:19:28Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000008",
+          "pressed": "00000008",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 25,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:30Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705190008000000",
+          "sequence": 26,
+          "time": "2026-11-06T08:19:30Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000008",
+          "resync": false,
+          "sequence": 26,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:30Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47051a0000000000",
+          "sequence": 27,
+          "time": "2026-11-06T08:19:30Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000001",
+          "pressed": "00000001",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 27,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:31Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47051b0001000000",
+          "sequence": 28,
+          "time": "2026-11-06T08:19:31Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000001",
+          "resync": false,
+          "sequence": 28,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:31Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47051c0000000000",
+          "sequence": 29,
+          "time": "2026-11-06T08:19:31Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00010000",
+          "pressed": "00010000",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 29,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:34Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47051d0000000100",
+          "sequence": 30,
+          "time": "2026-11-06T08:19:34Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00010000",
+          "resync": false,
+          "sequence": 30,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:34Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47051e0000000000",
+          "sequence": 31,
+          "time": "2026-11-06T08:19:34Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00020000",
+          "pressed": "00020000",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 31,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:36Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47051f0000000200",
+          "sequence": 32,
+          "time": "2026-11-06T08:19:36Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00020000",
+          "resync": false,
+          "sequence": 32,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:19:36Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705200000000000",
+          "sequence": 33,
+          "time": "2026-11-06T08:19:36Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00002000",
+          "pressed": "00002000",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 33,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:20:10Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705210000200000",
+          "sequence": 34,
+          "time": "2026-11-06T08:20:10Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00003000",
+          "pressed": "00001000",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 34,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:20:10Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705220000300000",
+          "sequence": 35,
+          "time": "2026-11-06T08:20:10Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00003000",
+          "resync": false,
+          "sequence": 35,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:20:11Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705230000000000",
+          "sequence": 36,
+          "time": "2026-11-06T08:20:11Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000400",
+          "pressed": "00000400",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 36,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:20:14Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705240000040000",
+          "sequence": 37,
+          "time": "2026-11-06T08:20:14Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000400",
+          "resync": false,
+          "sequence": 37,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:20:15Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705250000000000",
+          "sequence": 38,
+          "time": "2026-11-06T08:20:15Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "0000c000",
+          "pressed": "0000c000",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 38,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:20:18Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705260000c00000",
+          "sequence": 39,
+          "time": "2026-11-06T08:20:18Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "0000c000",
+          "resync": false,
+          "sequence": 39,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:20:19Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705270000000000",
+          "sequence": 40,
+          "time": "2026-11-06T08:20:19Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00003000",
+          "pressed": "00003000",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 40,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:20:21Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705280000300000",
+          "sequence": 41,
+          "time": "2026-11-06T08:20:21Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00003000",
+          "resync": false,
+          "sequence": 41,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:20:23Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705290000000000",
+          "sequence": 42,
+          "time": "2026-11-06T08:20:23Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "0000c000",
+          "pressed": "0000c000",
+          "released": "00000000",
+          "resync": false,
+          "sequence": 42,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:20:24Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47052a0000c00000",
+          "sequence": 43,
+          "time": "2026-11-06T08:20:24Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00008000",
+          "pressed": "00000000",
+          "released": "00004000",
+          "resync": false,
+          "sequence": 43,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:20:25Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47052b0000800000",
+          "sequence": 44,
+          "time": "2026-11-06T08:20:25Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "button_state",
+          "flags": 0,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00008000",
+          "resync": false,
+          "sequence": 44,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:20:25Z"
+        },
+        {
+          "event": "notification",
+          "hex": "47052c0000000000",
+          "sequence": 45,
+          "time": "2026-11-06T08:20:25Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "stream_stop_requested",
+          "time": "2026-11-06T08:23:45Z"
+        },
+        {
+          "event": "stream_stop_acknowledged",
+          "time": "2026-11-06T08:23:45Z"
+        },
+        {
+          "code": 0,
+          "event": "finished",
+          "reason": "Stream capture complete",
+          "time": "2026-11-06T08:23:45Z"
+        }
+      ]
+    },
+    {
+      "capture_sha256": "dd49cc1c49cd941a130a612b1a9e45a8ac95e579c64162a7b27e10e56bc642e1",
+      "packets": 1,
+      "events": [
+        {
+          "event": "central_state",
+          "state": 5,
+          "time": "2026-11-06T08:26:41Z"
+        },
+        {
+          "cached_name": "80EL",
+          "event": "discovered",
+          "local_name": "",
+          "manufacturer_data": "",
+          "rssi": -36,
+          "services": [],
+          "time": "2026-11-06T08:26:42Z"
+        },
+        {
+          "event": "connected",
+          "time": "2026-11-06T08:26:43Z"
+        },
+        {
+          "event": "service",
+          "time": "2026-11-06T08:26:43Z",
+          "uuid": "0000FF10-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "characteristic",
+          "properties": 24,
+          "service": "0000FF10-0000-1000-8000-00805F9B34FB",
+          "time": "2026-11-06T08:26:43Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "characteristic": "0000FF13-0000-1000-8000-00805F9B34FB",
+          "event": "descriptors",
+          "time": "2026-11-06T08:26:43Z",
+          "uuids": [
+            "2902"
+          ]
+        },
+        {
+          "event": "subscribed",
+          "time": "2026-11-06T08:26:43Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "stream_start_requested",
+          "time": "2026-11-06T08:26:43Z"
+        },
+        {
+          "event": "stream_start_acknowledged",
+          "time": "2026-11-06T08:26:43Z"
+        },
+        {
+          "event": "button_state",
+          "flags": 2,
+          "mask": "00000000",
+          "pressed": "00000000",
+          "released": "00000000",
+          "resync": true,
+          "sequence": 0,
+          "sequence_gap": false,
+          "time": "2026-11-06T08:26:43Z"
+        },
+        {
+          "event": "notification",
+          "hex": "4705000200000000",
+          "sequence": 1,
+          "time": "2026-11-06T08:26:43Z",
+          "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+        },
+        {
+          "event": "stream_stop_requested",
+          "time": "2026-11-06T08:26:52Z"
+        },
+        {
+          "event": "stream_stop_acknowledged",
+          "time": "2026-11-06T08:26:52Z"
+        },
+        {
+          "code": 0,
+          "event": "finished",
+          "reason": "Stream capture complete",
+          "time": "2026-11-06T08:26:52Z"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "USB-powered verification; battery tested separately",
+    "Bit 31 is unmapped",
+    "No phone background result"
+  ],
+  "package_sha256": "643e17862c39b6a693ac27b7dc61be16d73a7827937165ebd56d3e459eea3d1d",
+  "diagnostic_source_sha256": "08f950625db966e2cb619d1c13256d68cd35ccc8f9829f9d5cc8487699ab5075"
+}
