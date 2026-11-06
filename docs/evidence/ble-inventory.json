@@ -1,0 +1,56 @@
+{
+  "candidate_only": true,
+  "physical_micro_identity_pending": true,
+  "mode_at_scan": "Micro still USB D mode; K-mode battery check requested",
+  "event_log_sha256": "121cd38e81cefb4c581e857d5256679e4b450dae9b2330a29ac2814c361918a6",
+  "events": [
+    {
+      "event": "central_state",
+      "state": 5,
+      "time": "2026-11-06T07:27:39Z"
+    },
+    {
+      "cached_name": "80EL",
+      "event": "discovered",
+      "local_name": "",
+      "services": [],
+      "time": "2026-11-06T07:27:39Z"
+    },
+    {
+      "event": "connected",
+      "time": "2026-11-06T07:27:39Z"
+    },
+    {
+      "event": "service",
+      "time": "2026-11-06T07:27:39Z",
+      "uuid": "0000FF10-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "event": "characteristic",
+      "properties": 24,
+      "service": "0000FF10-0000-1000-8000-00805F9B34FB",
+      "time": "2026-11-06T07:27:39Z",
+      "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "characteristic": "0000FF13-0000-1000-8000-00805F9B34FB",
+      "event": "descriptors",
+      "time": "2026-11-06T07:27:39Z",
+      "uuids": [
+        "2902"
+      ]
+    },
+    {
+      "code": 0,
+      "event": "finished",
+      "reason": "GATT inventory complete",
+      "time": "2026-11-06T07:27:39Z"
+    }
+  ],
+  "characteristic_writes": false,
+  "notification_subscription": false,
+  "limits": [
+    "80EL is shared with other Yichip devices; correlate physical Micro power/mode before attributing this peripheral",
+    "GATT discovery does not establish custom button notifications"
+  ]
+}

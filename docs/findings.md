@@ -77,3 +77,25 @@ Flashing evidence is in `evidence/flashing.json`. The native flasher admits only
 pinned stock/name image pairs and three exact installed hashes: stock, name probe
 or the independently backed-up development unit's factory image. Unknown baselines
 are backed up and rejected before erase. There is no forced recovery mode.
+
+## First BLE candidate inventory
+
+While the Micro still enumerated over USB in D mode, a 40-second scan discovered
+one new `80EL` candidate (different CoreBluetooth UUID from the earlier Zero 2).
+A bounded connection exposed FF10, FF13 with write+notify properties (`0x18`),
+and CCC descriptor 2902. No subscription or characteristic write was made.
+Sanitized events are in `evidence/ble-inventory.json`. Because `80EL` is shared,
+physical power/mode correlation is still required before attributing that radio
+to this Micro. The user has been asked to unplug and pair in K mode.
+
+Static investigation found a radio configuration script at section offset
+`0xed2a` (7,596 bytes / 70 records under the previously recovered format), with
+an 18-entry attribute-table candidate at `0x105b4` targeting radio `0xc4975`.
+This is structural comparison evidence; Micro loader execution remains to audit.
+
+The Micro scatter records at offsets `0x12a8c` and `0x12a9c` describe initialized
+RAM at `0x20000` (size `0x794`, compressed source `0x0102aaac`, initializer
+`0x010183ca`) and BSS at `0x20794` (size `0x244c`, source marker `0x0102ae50`,
+initializer `0x01023d22`). The complete decompressor at offsets `0x3ca..0x41f`
+is byte-identical to the audited Zero 2 helper. These are Micro-derived table
+entries, not proof of free RAM, custom code placement or interrupt ownership.
