@@ -1,0 +1,45 @@
+# Micro findings
+
+## 2026-11-05
+
+The user has a Micro connected over USB. The macOS registry contains a
+`Pro Controller` interface with VID/PID `057e:2009`, revision `0200`, consistent
+with a Switch-compatible interface. This does not independently prove model,
+chipset or installed firmware. The raw registry is saved locally under
+`build/hardware/initial-usb.plist`. No device commands have been sent.
+
+The official [support page](https://support.8bitdo.com/) lists Micro v1.05,
+including Switch 2 support and an idle-power fix. Its separate Odyssey package
+link returned HTTP 403 to the initial downloader. The public updater catalog
+is being checked for the ordinary v1.05 package.
+
+The [Micro FAQ](https://support.8bitdo.com/faq/micro.html) describes Switch,
+Dinput and keyboard modes. No GATT contract or physical raw button mask is
+established yet.
+
+## Pinned stock and updater selection
+
+Vendor catalog type 60 / entry 1987 is Micro v1.05, 77,852 bytes. It contains one
+77,824-byte Yichip-cipher section at `0x01018000`, version 105, product `0x9020`.
+Decryption yields Micro names, SDK paths and HCI diagnostic strings; re-encryption
+reproduces the entire package exactly. Package and plaintext hashes are pinned in
+`sources.lock.json`. The catalog MD5 differs from the downloaded package, just as
+in the Zero 2 investigation; the discrepancy is preserved rather than ignored.
+This is reproducibility evidence, not vendor authentication.
+
+The pinned official macOS updater 2.5.2 (build 5), binary SHA256
+`966eabd911b6027951a06989d90c34bb38729ca53b22e7bf4db9ac6e935a5d2a`, maps Micro
+`0x9020` to **boot type 17**, whereas Zero 2 `0x9018` selects type 20. ARM64 anchors:
+`0x100007ca4` tests 9020, `0x100007cb4` sets 17, `0x100007d9c` calls
+`setBootType:`. The latter selector is confirmed by the existing REA metadata
+capture for this exact binary in the Zero 2 investigation. This does not yet
+establish Micro flash/read semantics.
+
+The updater's `S8BitdoDevice.plist` names Micro at VID/PID `2dc8:9020`, catalog
+60. Its English `MacOSTisp` says to select D mode. After the user did that,
+USB enumerated **8BitDo Micro gamepad**, `2dc8:9020`, revision `0200`, with a
+136-byte HID report descriptor (SHA256
+`2c5b161fb5dafa36f3337fcc8ced3b6f806d14cf4563817b6a1696b86988c264`). USB revision
+is not treated as installed firmware version. No device commands or flash have
+been performed. Native UI automation was unavailable (pipe startup failure), so
+analysis continues through the updater binary and USB descriptors.

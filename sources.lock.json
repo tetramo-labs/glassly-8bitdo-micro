@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "cryptdo8": {
+    "url": "https://github.com/aeromodes/8cryptdo",
+    "revision": "aaffcebafa481631de9c1d722a5693d02234e43a",
+    "sha256": "6701ba2b6089c47686b2785e1c5729e8533ef1102e1f7cdde904bad9b73167bc"
+  },
+  "stock": {
+    "name": "Micro v1.05",
+    "url": "http://dl.8bitdo.com:8080/firmwareFile/upload/7619d664-7869-406f-868b-d01decd186a5.dat",
+    "path": "research/downloads/Micro-v1.05.dat",
+    "size": 77852,
+    "sha256": "74f0a12709758cc13a358e44adaa1d6193a3532aac2685db07e913c8e3609ce6",
+    "catalog_type": 60,
+    "catalog_id": 1987,
+    "catalog_md5": "47DA00BDD38A0F2A32F08EEB620070C3",
+    "observed_md5": "a08fbc8e7a9fcf83d64b23fb83c1b4d3",
+    "catalog_md5_matches": false,
+    "sections": [
+      {
+        "offset": 0,
+        "id": 105,
+        "addr": 16875520,
+        "payload_len": 77824,
+        "pid": 36896,
+        "cipher": "yichip",
+        "sha256": "e31c7f7656fb041ec6ede6603762d841783eb3d9b760321eaaa0c582aaa59233"
+      }
+    ]
+  }
+}
