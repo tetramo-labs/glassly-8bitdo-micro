@@ -1,0 +1,27 @@
+{
+  "updater_sha256": "966eabd911b6027951a06989d90c34bb38729ca53b22e7bf4db9ac6e935a5d2a",
+  "entry": "0x10001be68",
+  "device_vid": "0x2dc8",
+  "device_pid": "0x9020",
+  "packets": [
+    {
+      "type": 1,
+      "report_id": 0,
+      "bytes": "06005001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "type": 1,
+      "report_id": 0,
+      "bytes": "81050051000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "hardware_accessed": false,
+  "stubs": [
+    "USB identity property getters",
+    "IOHIDDeviceSetReport capture"
+  ],
+  "limitations": [
+    "Stack/globals initially zero; vendor legacy packet has trailing uninitialized stack bytes",
+    "Host routine execution only; device command handling not emulated"
+  ]
+}

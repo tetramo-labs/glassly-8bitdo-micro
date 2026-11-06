@@ -1,9 +1,9 @@
 # Micro port plan
 
 - [x] Pin stock Micro firmware and inspect every package section.
-- [ ] Identify update USB interface and verify its protocol. Runtime D-mode identity and updater boot-type selection are established.
-- [ ] Back up the installed application and device data using a verified read path.
-- [ ] Reflash stock, then a minimal observable patch with full readback.
+- [x] Identify runtime/update USB interfaces and verify Micro boot type 17 and read/write protocol.
+- [x] Back up and independently reread the application and metadata.
+- [x] Reflash stock and a name-only patch; full readback, unchanged metadata and runtime USB verified.
 - [ ] Recover Micro input masks, notification/CCC lifecycle and idle policy.
 - [ ] Bind memory/startup/execution placement and build the button stream.
 - [ ] Flash and verify all buttons, chords, reconnect and battery idle behavior.

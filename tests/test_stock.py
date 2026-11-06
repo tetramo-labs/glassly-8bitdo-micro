@@ -31,3 +31,16 @@ class StockTests(unittest.TestCase):
     def test_cipher_detection_agrees_with_pin(self):
         raw, sections, _ = load_stock()
         self.assertEqual(load_crypto().detect_cipher(raw, sections[0]).NAME, 'yichip')
+
+
+class NameProbeTests(unittest.TestCase):
+    def test_only_complete_model_name_changes(self):
+        from build_name_probe import build, OFFSET, BEFORE, AFTER
+        raw, sections, payloads = load_stock()
+        package, payload, report = build()
+        self.assertEqual(package[:28], raw[:28])
+        self.assertEqual(payload[:OFFSET], payloads[0][:OFFSET])
+        self.assertEqual(payload[OFFSET:OFFSET + len(AFTER)], AFTER)
+        self.assertEqual(payload[OFFSET + len(BEFORE):], payloads[0][OFFSET + len(BEFORE):])
+        self.assertFalse(report['hardware_accessed'])
+        self.assertEqual(unpack(package, ['yichip']), (sections, [payload]))

@@ -1,0 +1,37 @@
+{
+  "kind": "Experimental name-only package; no custom button stream",
+  "package_sha256": "6c12c506242b60c75c446cfa9bff265102b214aa6d5e5afb7aa63f33c88c7d1a",
+  "plaintext_sha256": "fca4e5698166c69b67feabcce95e6674d7afcd72478f9acb25c3b9b71caf6e8e",
+  "offset": "0x12a44",
+  "before": "8BitDo Micro gamepad",
+  "after": "Glassly Micro test01",
+  "changed_bytes": [
+    76356,
+    76357,
+    76358,
+    76359,
+    76360,
+    76361,
+    76362,
+    76363,
+    76364,
+    76365,
+    76366,
+    76367,
+    76368,
+    76369,
+    76370,
+    76371,
+    76372,
+    76373,
+    76374,
+    76375
+  ],
+  "firmware_code_unchanged": true,
+  "header_unchanged": true,
+  "hardware_accessed": false,
+  "limits": [
+    "Runtime visibility of this model string requires a hardware check",
+    "No custom GATT, new RAM or execution placement"
+  ]
+}

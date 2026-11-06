@@ -40,6 +40,40 @@ The updater's `S8BitdoDevice.plist` names Micro at VID/PID `2dc8:9020`, catalog
 USB enumerated **8BitDo Micro gamepad**, `2dc8:9020`, revision `0200`, with a
 136-byte HID report descriptor (SHA256
 `2c5b161fb5dafa36f3337fcc8ced3b6f806d14cf4563817b6a1696b86988c264`). USB revision
-is not treated as installed firmware version. No device commands or flash have
-been performed. Native UI automation was unavailable (pipe startup failure), so
+is not treated as installed firmware version. No device commands or flash had been performed at that stage. Native UI automation was unavailable (pipe startup failure), so
 analysis continues through the updater binary and USB descriptors.
+
+## Verified update entry, backups and first flashes
+
+Executing the pinned updater's `SHIDDinput boot:` routine at `0x10001be68`
+offline with Micro identity produces two 64-byte output reports beginning
+`06 00 50 01 00 00` and `81 05 00 51 00 00`. The rest is zero in the controlled
+emulation; the vendor legacy path leaves trailing stack bytes uninitialized.
+Our tool initializes the entire reports. Sending this sequence to the exact
+runtime VID/PID/location/136-byte descriptor changed enumeration to `8BitDo Boot`,
+`2dc8:3208`, with the observed 33-byte boot HID descriptor. Command 8 returned
+product `9020`, with valid response CRC.
+
+Two independent command-5 reads produced identical 77,824-byte application
+backups and 4,096-byte metadata backups. Version record is 105. The installed
+application matches pinned v1.05 through offset `0x12e4f`; its last 432 bytes are
+nonzero and differ from stock zeros. Their purpose is unknown. Both original
+captures remain local and were preserved before any erase.
+
+`scripts/flash.py stock --apply` then completed using the Micro boot-type-17
+path audited in `evidence/macos-updater-protocol.json`. All 77,824 plaintext bytes
+match the stock image, all 4,096 metadata bytes are unchanged, and USB rebooted
+as `8BitDo Micro gamepad`. Stock flashing overwrote the original tail with the
+package's zeros; this does not establish the tail's purpose.
+
+The name-only image changes the same-length string at offset `0x12a44` from
+`8BitDo Micro gamepad` to `Glassly Micro test01`. It changes no instructions,
+addresses, startup data, RAM allocation or GATT behavior. Its full readback
+matches, exactly twenty plaintext bytes differ from stock, metadata is unchanged,
+and runtime USB reports **Glassly Micro test01** with the original 136-byte HID
+descriptor. This establishes the first minimal custom flash, not button streaming.
+
+Flashing evidence is in `evidence/flashing.json`. The native flasher admits only
+pinned stock/name image pairs and three exact installed hashes: stock, name probe
+or the independently backed-up development unit's factory image. Unknown baselines
+are backed up and rejected before erase. There is no forced recovery mode.

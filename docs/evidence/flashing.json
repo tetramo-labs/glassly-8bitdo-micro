@@ -1,0 +1,55 @@
+{
+  "hardware_observed": true,
+  "flashes": [
+    {
+      "image": "stock",
+      "transaction": "build/hardware/20261106T072004.211887Z-script-flash",
+      "exit_code": 0,
+      "package_sha256": "74f0a12709758cc13a358e44adaa1d6193a3532aac2685db07e913c8e3609ce6",
+      "expected_plaintext_sha256": "e31c7f7656fb041ec6ede6603762d841783eb3d9b760321eaaa0c582aaa59233",
+      "readback_sha256": "e31c7f7656fb041ec6ede6603762d841783eb3d9b760321eaaa0c582aaa59233",
+      "full_application_match": true,
+      "verified_bytes": 77824,
+      "changed_bytes": 426,
+      "metadata_unchanged": true,
+      "source_sha256": {
+        "scripts/flash.py": "5d3780bc70d7da81f02d099171def3616be2a38f231b20eb9418b97c2e2bb63f",
+        "tools/flash_micro.c": "a14c63901f0128488914219895b876c5553f05526042a5120e8f2bcd4661607b",
+        "tools/build_name_probe.py": "0da39daac42f17ce38a952a401e1f0073677fbd0507d49aa742040665fd5b139",
+        "tools/firmware_image.py": "5a878ae85269e31ce4185b89695141b2ff39dc9c84ef1dd448846f4c9d3d0c34",
+        "third_party/8cryptdo/cryptdo8.py": "6701ba2b6089c47686b2785e1c5729e8533ef1102e1f7cdde904bad9b73167bc",
+        "sources.lock.json": "1c87aa5c434199bec71574a05983ef6999da12a98117832ee769aac65d035d5b"
+      },
+      "runtime_product": "8BitDo Micro gamepad",
+      "runtime_vid_pid": "2dc8:9020",
+      "runtime_hid_report_bytes": 136
+    },
+    {
+      "image": "name-probe",
+      "transaction": "build/hardware/20261106T072136.958327Z-script-flash",
+      "exit_code": 0,
+      "package_sha256": "6c12c506242b60c75c446cfa9bff265102b214aa6d5e5afb7aa63f33c88c7d1a",
+      "expected_plaintext_sha256": "fca4e5698166c69b67feabcce95e6674d7afcd72478f9acb25c3b9b71caf6e8e",
+      "readback_sha256": "fca4e5698166c69b67feabcce95e6674d7afcd72478f9acb25c3b9b71caf6e8e",
+      "full_application_match": true,
+      "verified_bytes": 77824,
+      "changed_bytes": 20,
+      "metadata_unchanged": true,
+      "source_sha256": {
+        "scripts/flash.py": "5d3780bc70d7da81f02d099171def3616be2a38f231b20eb9418b97c2e2bb63f",
+        "tools/flash_micro.c": "a14c63901f0128488914219895b876c5553f05526042a5120e8f2bcd4661607b",
+        "tools/build_name_probe.py": "0da39daac42f17ce38a952a401e1f0073677fbd0507d49aa742040665fd5b139",
+        "tools/firmware_image.py": "5a878ae85269e31ce4185b89695141b2ff39dc9c84ef1dd448846f4c9d3d0c34",
+        "third_party/8cryptdo/cryptdo8.py": "6701ba2b6089c47686b2785e1c5729e8533ef1102e1f7cdde904bad9b73167bc",
+        "sources.lock.json": "1c87aa5c434199bec71574a05983ef6999da12a98117832ee769aac65d035d5b"
+      },
+      "runtime_product": "Glassly Micro test01",
+      "runtime_vid_pid": "2dc8:9020",
+      "runtime_hid_report_bytes": 136
+    }
+  ],
+  "limits": [
+    "No custom GATT stream or button mapping verified",
+    "Original device tail preserved only in local backups"
+  ]
+}
