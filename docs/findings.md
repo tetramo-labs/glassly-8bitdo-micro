@@ -225,3 +225,14 @@ The app change is published on `dev` through commit `2514a339b6`; iOS controller
 restoration tests (20), Android Micro tests (6), pairing UI tests (15), controller
 registry tests (10), Android compilation and the full app typecheck pass.
 The Maestro flow and physical-phone background tests remain unexecuted.
+
+### Second Micro flashed
+
+On 2026-11-06 UTC, a second Micro was backed up and initially rejected before
+erase because its factory tail differed from the approved baselines. The user
+reinstalled v1.05 with the official updater. A new backup then matched the pinned
+stock image. The button-stream flash verified all 77,824 plaintext bytes, kept
+all 4,096 metadata bytes unchanged, verified version 105, and rebooted as
+`Glassly Micro test01` with the expected runtime HID descriptor. The original
+and post-update backups are preserved locally. Physical button/BLE tests have
+not been repeated on this unit. See `evidence/second-micro-flash.json`.
