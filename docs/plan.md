@@ -5,7 +5,7 @@
 - [x] Back up and independently reread the application and metadata.
 - [x] Reflash stock and a name-only patch; full readback, unchanged metadata and runtime USB verified.
 - [x] Recover raw GPIO masks and stock notification sender offline; verify battery BLE subscription.
-- [ ] Flash the bounded notification echo experiment and verify delivery.
+- [x] Flash the bounded notification echo experiment and verify delivery.
 - [ ] Recover physical button labels, polling/debounce ownership, CCC lifecycle and idle policy.
 - [ ] Bind memory/startup/execution placement and build the button stream.
 - [ ] Flash and verify all buttons, chords, reconnect and battery idle behavior.

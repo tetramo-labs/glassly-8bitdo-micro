@@ -1,0 +1,145 @@
+{
+  "hardware_observed": true,
+  "mode": "D",
+  "usb_connected": true,
+  "image": "notify-probe",
+  "package_sha256": "e86ba128884dd1a741bcefd21d4978b2a7757a94d00c42d315b424097cd598c3",
+  "capture_sha256": "ec4599b12b6fa85fcd94faa576c338d39052b0574c40ab47377cf1d9713f6faf",
+  "writes": [
+    "31",
+    "a5",
+    "00",
+    "ff"
+  ],
+  "matching_notifications": [
+    "31",
+    "a5",
+    "00",
+    "ff"
+  ],
+  "all_writes_acknowledged": true,
+  "events": [
+    {
+      "event": "central_state",
+      "state": 5,
+      "time": "2026-11-06T07:59:37Z"
+    },
+    {
+      "cached_name": "80EL",
+      "event": "discovered",
+      "local_name": "",
+      "manufacturer_data": "",
+      "rssi": -23,
+      "services": [],
+      "time": "2026-11-06T07:59:38Z"
+    },
+    {
+      "event": "connected",
+      "time": "2026-11-06T07:59:38Z"
+    },
+    {
+      "event": "service",
+      "time": "2026-11-06T07:59:38Z",
+      "uuid": "0000FF10-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "event": "characteristic",
+      "properties": 24,
+      "service": "0000FF10-0000-1000-8000-00805F9B34FB",
+      "time": "2026-11-06T07:59:38Z",
+      "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "characteristic": "0000FF13-0000-1000-8000-00805F9B34FB",
+      "event": "descriptors",
+      "time": "2026-11-06T07:59:39Z",
+      "uuids": [
+        "2902"
+      ]
+    },
+    {
+      "event": "subscribed",
+      "time": "2026-11-06T07:59:39Z",
+      "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "event": "write_requested",
+      "hex": "31",
+      "time": "2026-11-06T07:59:39Z"
+    },
+    {
+      "event": "write_acknowledged",
+      "index": 0,
+      "time": "2026-11-06T07:59:39Z"
+    },
+    {
+      "event": "notification",
+      "hex": "31",
+      "sequence": 1,
+      "time": "2026-11-06T07:59:39Z",
+      "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "event": "write_requested",
+      "hex": "a5",
+      "time": "2026-11-06T07:59:39Z"
+    },
+    {
+      "event": "write_acknowledged",
+      "index": 1,
+      "time": "2026-11-06T07:59:39Z"
+    },
+    {
+      "event": "notification",
+      "hex": "a5",
+      "sequence": 2,
+      "time": "2026-11-06T07:59:39Z",
+      "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "event": "write_requested",
+      "hex": "00",
+      "time": "2026-11-06T07:59:39Z"
+    },
+    {
+      "event": "write_acknowledged",
+      "index": 2,
+      "time": "2026-11-06T07:59:39Z"
+    },
+    {
+      "event": "notification",
+      "hex": "00",
+      "sequence": 3,
+      "time": "2026-11-06T07:59:39Z",
+      "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "event": "write_requested",
+      "hex": "ff",
+      "time": "2026-11-06T07:59:39Z"
+    },
+    {
+      "event": "write_acknowledged",
+      "index": 3,
+      "time": "2026-11-06T07:59:39Z"
+    },
+    {
+      "event": "notification",
+      "hex": "ff",
+      "sequence": 4,
+      "time": "2026-11-06T07:59:39Z",
+      "uuid": "0000FF13-0000-1000-8000-00805F9B34FB"
+    },
+    {
+      "code": 0,
+      "event": "finished",
+      "reason": "All four acknowledged echoes verified",
+      "time": "2026-11-06T07:59:39Z"
+    }
+  ],
+  "limits": [
+    "USB-powered verification only",
+    "No button stream",
+    "No idle policy change or battery reliability claim"
+  ]
+}

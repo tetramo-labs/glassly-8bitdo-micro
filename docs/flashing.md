@@ -72,8 +72,8 @@ streaming and phone background operation remain work in progress.
 
 ## Notification experiment
 
-`notify-probe` is the next bounded experiment, **built and emulated but not yet
-hardware verified**. It echoes a single received byte over the existing FF13
+`notify-probe` has been **flashed with full readback and all four notification
+echoes verified with USB connected**. It echoes a single received byte over the existing FF13
 notification path; it does not stream buttons or alter idle behavior.
 
 ```sh

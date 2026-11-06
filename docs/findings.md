@@ -129,7 +129,7 @@ input ownership remain separate work. Source and evidence are in
 `tools/inspect_input.py`, `evidence/input-emulation.json` and
 `evidence/startup-emulation.json`.
 
-## Prepared notification experiment (not yet flashed)
+## Notification experiment
 
 The Micro's stock sender at `0x0101a6cc` prefixes the registered handle from
 `0x20648` and builds command 09; actual execution to IPC entry verifies three
@@ -154,3 +154,16 @@ The existing vendor configuration command 04 remains intact; host echo mode
 writes only `31`, `a5`, `00`, `ff`, requiring both an acknowledgement and matching
 notification before advancing. Tail execution and on-air notifications still
 require hardware validation. This image contains **no button stream**.
+
+### Hardware verification
+
+The notification probe flashed successfully on 2026-11-06 UTC. All 77,824
+plaintext bytes matched the built image, 71 bytes changed from the name-only
+baseline inside the hook/tail intervals, and all 4,096 metadata bytes remained
+unchanged. Runtime USB returned as Glassly Micro test01 with the original HID
+descriptor. At 07:59 UTC, with USB connected in D mode, FF13 subscription and all
+four acknowledged notification echoes (`31`, `a5`, `00`, `ff`) succeeded. This
+establishes execution from the injected tail and on-air notifications through
+the Micro's stock registered handle/CCC path. It does not establish queued button
+streaming, battery idle reliability, reconnect behavior or phone background use.
+See `evidence/flashing.json` and `evidence/notification-probe-gatt.json`.
