@@ -167,3 +167,20 @@ establishes execution from the injected tail and on-air notifications through
 the Micro's stock registered handle/CCC path. It does not establish queued button
 streaming, battery idle reliability, reconnect behavior or phone background use.
 See `evidence/flashing.json` and `evidence/notification-probe-gatt.json`.
+
+## Button-stream image prepared
+
+The Micro-specific 32-bit stream uses protocol `47 05`, sixteen queued snapshots,
+A1/A0 start/stop, and the raw mask `0x8003fff9`. It reserves 88 bytes from the third
+600-byte OEM pool block by reducing that pool count from three to two, and uses
+352 bytes of the verified tail. Startup RAM is unchanged and actual pool
+initialization leaves the excluded block untouched. The other pools match stock.
+
+The input timer, report-task hook and zero-status command-09 acknowledgement
+were independently checked on Micro instructions. All 131,072 raw combinations
+produce correct complete packets; 2,048 capacity/IRQ cases and 12,000 independent
+queue-model polls pass, including overflow and sequence wrap. Connect resets,
+explicit stop and connected/enabled idle/watchdog policy are checked offline.
+Only the OEM report task and connection power/indicator helper are stubbed in
+the stream harness. Detailed bindings, placement and limits are in
+`buttons-probe.md`; hardware delivery and physical labels remain unverified.

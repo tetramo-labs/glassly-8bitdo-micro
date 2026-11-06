@@ -1,13 +1,13 @@
 import Foundation
 import CoreBluetooth
 
-// Bounded Micro BLE diagnostics. Only echo mode writes values: 31, a5, 00, ff.
+// Bounded Micro BLE diagnostics. Echo writes 31/a5/00/ff; buttons writes A1/A0.
 // Echo requires the separately flashed Micro notification probe; avoid vendor command 04.
 let args = Array(CommandLine.arguments.dropFirst())
-guard args.count == 3, ["scan", "inspect", "listen", "echo"].contains(args[0]),
+guard args.count == 3, ["scan", "inspect", "listen", "echo", "buttons"].contains(args[0]),
       let duration = Double(args[2]), duration.isFinite, (5...300).contains(duration),
       args[0] == "scan" ? args[1] == "-" : UUID(uuidString: args[1]) != nil else {
-    fputs("Usage: probe_ble scan - SECONDS | inspect OBSERVED_UUID SECONDS | listen OBSERVED_UUID SECONDS | echo OBSERVED_UUID SECONDS\n", stderr)
+    fputs("Usage: probe_ble scan - SECONDS | inspect OBSERVED_UUID SECONDS | listen OBSERVED_UUID SECONDS | echo OBSERVED_UUID SECONDS | buttons OBSERVED_UUID SECONDS\n", stderr)
     exit(64)
 }
 final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
@@ -23,6 +23,10 @@ final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var echoIndex = 0
     var acknowledged = false
     var echoed = false
+    var streamStarted = false
+    var stopping = false
+    var previousSequence: UInt8?
+    var previousMask: UInt32 = 0
     let identifier = UUID(uuidString: args[1])
     func emit(_ event: String, _ fields: [String: Any] = [:]) {
         var record = fields
@@ -43,6 +47,13 @@ final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         central = CBCentralManager(delegate: self, queue: .main)
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
             guard let self else { return }
+            if args[0] == "buttons", self.streamStarted, let target = self.target, let characteristic = self.characteristic {
+                self.stopping = true
+                self.emit("stream_stop_requested")
+                target.writeValue(Data([0xa0]), for: characteristic, type: .withResponse)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in self?.finish(1, "Stop acknowledgement timeout") }
+                return
+            }
             self.finish(args[0] == "scan" || (args[0] == "listen" && self.subscribed) ? 0 : 1, "time limit")
         }
     }
@@ -107,6 +118,10 @@ final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         subscribed = true
         emit("subscribed", ["uuid": characteristic.uuid.uuidString])
         if args[0] == "echo" { sendEcho() }
+        if args[0] == "buttons", let target {
+            emit("stream_start_requested")
+            target.writeValue(Data([0xa1]), for: characteristic, type: .withResponse)
+        }
     }
     func sendEcho() {
         guard let target, let characteristic, echoIndex < echoValues.count else { finish(1, "Missing echo target"); return }
@@ -123,6 +138,11 @@ final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     func peripheral(_: CBPeripheral, didWriteValueFor _: CBCharacteristic, error: Error?) {
         guard error == nil else { finish(1, error!.localizedDescription); return }
+        if args[0] == "buttons" {
+            if stopping { emit("stream_stop_acknowledged"); finish(previousSequence == nil ? 1 : 0, previousSequence == nil ? "No baseline received" : "Stream capture complete") }
+            else { streamStarted = true; emit("stream_start_acknowledged") }
+            return
+        }
         acknowledged = true
         emit("write_acknowledged", ["index": echoIndex])
         advanceEcho()
@@ -133,6 +153,22 @@ final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             guard echoIndex < echoValues.count, characteristic.value == Data([echoValues[echoIndex]]) else { finish(1, "Unexpected echo notification"); return }
             echoed = true
         }
+        if args[0] == "buttons" {
+            let bytes = Array(characteristic.value ?? Data())
+            guard bytes.count == 8, bytes[0] == 0x47, bytes[1] == 5, bytes[3] & 0xfc == 0 else { finish(1, "Invalid Micro button packet"); return }
+            let mask = UInt32(bytes[4]) | UInt32(bytes[5]) << 8 | UInt32(bytes[6]) << 16 | UInt32(bytes[7]) << 24
+            guard mask & ~UInt32(0x8003fff9) == 0 else { finish(1, "Unknown raw button bits"); return }
+            let baseline = bytes[3] & 2 != 0
+            guard previousSequence != nil || (baseline && bytes[2] == 0) else { finish(1, "Missing initial baseline"); return }
+            let gap = previousSequence.map { bytes[2] != $0 &+ 1 } ?? false
+            let resync = baseline || bytes[3] & 1 != 0 || gap
+            let pressed = resync ? 0 : mask & ~previousMask
+            let released = resync ? 0 : previousMask & ~mask
+            previousSequence = bytes[2]; previousMask = mask
+            emit("button_state", ["sequence": bytes[2], "flags": bytes[3], "mask": String(format: "%08x", mask),
+                 "pressed": String(format: "%08x", pressed), "released": String(format: "%08x", released),
+                 "resync": resync, "sequence_gap": gap])
+        }
         notifications += 1
         emit("notification", ["uuid": characteristic.uuid.uuidString, "sequence": notifications,
              "hex": (characteristic.value ?? Data()).map { String(format: "%02x", $0) }.joined()])
@@ -141,13 +177,13 @@ final class Probe: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     func complete() {
         pending -= 1
         if pending == 0 {
-            if ["listen", "echo"].contains(args[0]), let target {
+            if ["listen", "echo", "buttons"].contains(args[0]), let target {
                 let serviceID = CBUUID(string: "0000FF10-0000-1000-8000-00805F9B34FB")
                 let valueID = CBUUID(string: "0000FF13-0000-1000-8000-00805F9B34FB")
                 let matches = (target.services ?? []).filter { $0.uuid == serviceID }
                     .flatMap { $0.characteristics ?? [] }.filter { $0.uuid == valueID && $0.properties.contains(.notify) }
                 guard matches.count == 1 else { finish(1, "Expected exactly one FF13 notify characteristic"); return }
-                guard args[0] != "echo" || matches[0].properties.contains(.write) else { finish(1, "Echo requires writes with response"); return }
+                guard !["echo", "buttons"].contains(args[0]) || matches[0].properties.contains(.write) else { finish(1, "Echo requires writes with response"); return }
                 characteristic = matches[0]
                 target.setNotifyValue(true, for: matches[0])
             } else { finish(0, "GATT inventory complete") }

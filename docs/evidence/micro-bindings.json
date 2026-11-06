@@ -1,0 +1,39 @@
+{
+  "hardware_accessed": false,
+  "stock_plaintext_sha256": "e31c7f7656fb041ec6ede6603762d841783eb3d9b760321eaaa0c582aaa59233",
+  "input_timer": "0x219e4",
+  "callback": "0x0101c290",
+  "registration": "0x010209d0",
+  "report_task_call": "0x0101c2a4",
+  "report_task": "0x0101ce94",
+  "nominal_rearm_byte": 10,
+  "timer_active_and_linked": true,
+  "completion_entry_boundary": "0x010190ca",
+  "completion_exit_boundary": "0x0101970a",
+  "command09_status_cases": [
+    {
+      "status": 0,
+      "ack_bit6": true
+    },
+    {
+      "status": 1,
+      "ack_bit6": false
+    },
+    {
+      "status": 2,
+      "ack_bit6": false
+    },
+    {
+      "status": 255,
+      "ack_bit6": false
+    }
+  ],
+  "ack_bitmap": "0x20010",
+  "instruction_stubs": [],
+  "limits": [
+    "Timer wall-clock cadence not measured",
+    "Completion payload is synthetic; ISR/radio not emulated",
+    "ACK means radio acceptance, not host receipt"
+  ],
+  "source_sha256": "8e903cac2ae3b2026eec25b1db99227574b08ff7ad8ae493bffdb582cbd73adc"
+}

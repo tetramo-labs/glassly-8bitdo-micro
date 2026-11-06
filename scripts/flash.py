@@ -18,7 +18,7 @@ from build_name_probe import build
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('image', choices=['stock', 'name-probe', 'notify-probe'])
+    parser.add_argument('image', choices=['stock', 'name-probe', 'notify-probe', 'buttons-probe'])
     parser.add_argument('--location', type=lambda s: int(s, 0), help='Observed macOS USB location ID')
     parser.add_argument('--apply', action='store_true')
     args = parser.parse_args()
@@ -27,9 +27,12 @@ def main():
         payload = payloads[0]
     elif args.image == 'name-probe':
         package, payload, _ = build()
-    else:
+    elif args.image == 'notify-probe':
         from build_notify_probe import build as build_notify
         package, payload, _ = build_notify()
+    else:
+        from build_buttons_probe import build as build_buttons
+        package, payload, _ = build_buttons()
     plan = dict(image=args.image, package_sha256=sha256(package), plaintext_sha256=sha256(payload),
                 product='Micro / boot product 0x9020', address='0x01018000',
                 length=len(payload), version_record='0x01017040',
@@ -56,7 +59,8 @@ def main():
     (output/'input-plaintext.bin').write_bytes(payload)
     sources = ['scripts/flash.py', 'tools/flash_micro.c', 'tools/build_name_probe.py',
                'tools/firmware_image.py', 'tools/build_notify_probe.py', 'tools/startup.py',
-               'tools/elf_text.py', 'firmware/notify_probe.s', 'third_party/8cryptdo/cryptdo8.py', 'sources.lock.json']
+               'tools/elf_text.py', 'firmware/notify_probe.s', 'firmware/buttons_probe.s',
+               'tools/build_buttons_probe.py', 'third_party/8cryptdo/cryptdo8.py', 'sources.lock.json']
     plan['source_sha256'] = {p: sha256((ROOT/p).read_bytes()) for p in sources}
     for source in sources:
         archive = output / 'sources' / source

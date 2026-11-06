@@ -85,3 +85,27 @@ class NotifyProbeTests(unittest.TestCase):
         self.assertIn(sha256(patched), native)
         self.assertEqual(report['persistent_ram_bytes'], 0)
         self.assertEqual(report['tail_bytes'], 76)
+
+
+class ButtonProbeTests(unittest.TestCase):
+    def test_confined_changes_and_pinned_container(self):
+        from build_buttons_probe import build, HOOKS, TAIL, STATE, STATE_BYTES
+        from build_name_probe import build as name
+        from startup import reconstruct
+        from firmware_image import sha256
+        _, baseline, _ = name()
+        package, payload, report = build()
+        allowed = set(range(TAIL, TAIL+report['tail_bytes']))
+        for offset, expected in HOOKS.items(): allowed.update(range(offset,offset+len(expected)))
+        differences = {i for i,(a,b) in enumerate(zip(baseline,payload)) if a!=b}
+        self.assertTrue(differences <= allowed)
+        self.assertEqual(reconstruct(payload),reconstruct(baseline))
+        self.assertEqual(unpack(package,['yichip'])[1],[payload])
+        self.assertEqual(STATE,0x2212c+2*600)
+        self.assertEqual(STATE_BYTES,88)
+        self.assertLessEqual(report['tail_bytes'],432)
+        self.assertEqual(report['raw_mask_bits'],'0x8003fff9')
+        native = (Path(__file__).resolve().parents[1]/'tools/flash_micro.c').read_text()
+        self.assertIn(sha256(package),native)
+        self.assertIn(sha256(payload),native)
+        self.assertFalse(report['hardware_accessed'])

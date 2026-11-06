@@ -1,7 +1,7 @@
 # Micro flashing on macOS
 
-The current custom image is a **name-only experiment**, not a Glassly button
-stream. It was flashed on one Micro with full readback and normal USB boot.
+The notification experiment is verified on one Micro with full readback, normal
+USB boot and four BLE echoes. It does not yet stream buttons.
 Experimental firmware can brick the device. Keep all local backups.
 
 ## Prepare
